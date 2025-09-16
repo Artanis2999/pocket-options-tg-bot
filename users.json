@@ -1,0 +1,24 @@
+{
+    "users": [
+        {
+            "id": 1443519061,
+            "name": "Artanis",
+            "username": "Artanis2999",
+            "reg": false,
+            "confirm": false,
+            "external_id": "",
+            "admin": true,
+            "amount": 0
+        },
+        {
+            "id": 6278733656,
+            "name": "Игорь Арбитражный",
+            "username": "igornarizh",
+            "reg": false,
+            "confirm": false,
+            "external_id": "",
+            "admin": true,
+            "amount": 0
+        }
+    ]
+}
