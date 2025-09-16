@@ -4,10 +4,10 @@
             "id": 1443519061,
             "name": "Artanis",
             "username": "Artanis2999",
-            "reg": true,
+            "reg": false,
             "confirm": false,
             "external_id": "",
-            "admin": true,
+            "admin": false,
             "amount": 0
         },
         {
@@ -18,6 +18,46 @@
             "confirm": false,
             "external_id": "",
             "admin": true,
+            "amount": 0
+        },
+        {
+            "id": 6335977925,
+            "name": "хайлайтер",
+            "username": "",
+            "reg": false,
+            "confirm": false,
+            "external_id": "",
+            "admin": false,
+            "amount": 0
+        },
+        {
+            "id": 990522376,
+            "name": "𝙑𝙤𝙨𝙨𝘾𝙧𝙞𝙢𝙚🇺🇸",
+            "username": "vossnesos",
+            "reg": false,
+            "confirm": false,
+            "external_id": "",
+            "admin": false,
+            "amount": 0
+        },
+        {
+            "id": 1957060751,
+            "name": "?",
+            "username": "cht0_napisat",
+            "reg": false,
+            "confirm": true,
+            "external_id": "111607182",
+            "admin": false,
+            "amount": 0
+        },
+        {
+            "id": 8111931321,
+            "name": "♠︎",
+            "username": "astraxa28",
+            "reg": false,
+            "confirm": true,
+            "external_id": "111607163",
+            "admin": false,
             "amount": 0
         }
     ]

@@ -611,15 +611,16 @@ import random
 async def handle_signal_button(message: types.Message):
     if not has_signal_access(message.from_user.id):
         await message.answer("❌ Нет доступа к сигналам. Завершите регистрацию или войдите как админ.")
+    else:
 
-    action = random.choice(("Купить", "Продать"))
-    minutes = random.randint(1, 20)
-    text = (
-        "📢 Сигнал AUD/CAD\n"
-        f"• Действие: {action}\n"
-        f"• Время: {minutes} мин."
-    )
-    await message.answer(text)
+        action = random.choice(("Купить", "Продать"))
+        minutes = random.randint(1, 20)
+        text = (
+            "📢 Сигнал AUD/CAD\n"
+            f"• Действие: {action}\n"
+            f"• Время: {minutes} мин."
+        )
+        await message.answer(text)
 
 @dp.message()
 async def catch_external_id(message: types.Message):
