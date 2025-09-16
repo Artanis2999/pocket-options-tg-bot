@@ -7,7 +7,7 @@
             "reg": false,
             "confirm": false,
             "external_id": "",
-            "admin": false,
+            "admin": true,
             "amount": 0
         },
         {
