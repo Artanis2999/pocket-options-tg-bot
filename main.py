@@ -161,13 +161,26 @@ async def handle_send_id_entry(message: types.Message):
     lang = user_data.get(uid, {}).get("lang", "ru")
     t = TRANSLATIONS.get(lang, TRANSLATIONS["en"])
 
-    # переводим пользователя в режим ожидания ввода ID
     user_data.setdefault(uid, {})["last_stage"] = "awaiting_external_id"
 
-    # просто текст без каких-либо inline-кнопок
     await message.answer(
         t.get("ask_external_id", "Пришлите ваш ID одним сообщением (только цифры).")
     )
+
+    # ↓↓↓ вставка с отправкой фото ↓↓↓
+    try:
+        help_path = (Path(__file__).parent / "assets" / "help.jpg").resolve()
+        if help_path.exists():
+            await bot.send_photo(
+                chat_id=message.chat.id,
+                photo=FSInputFile(str(help_path)),
+                caption="Где найти ваш ID — пример на скриншоте."
+            )
+        else:
+            logging.warning("Help image not found: %s", help_path)
+    except Exception:
+        logging.exception("send help.jpg failed")
+
 
 async def notify_admins_about_confirmation(user_id: int):
     try:
@@ -364,19 +377,11 @@ async def cmd_start(message: types.Message):
     register_user_if_new(message.from_user)
     builder = InlineKeyboardBuilder()
     
-    for i in range(0, len(LANGUAGES), 2):
-        languages = list(LANGUAGES.items())
-        row = languages[i:i+2]
-        
-        for code, info in row:
-            builder.button(
-                text=f"{info['flag']} {info['name']}", 
-                callback_data=f"lang_{code}"
-            )
-        
-        
-        builder.adjust(2)
-    
+    builder.button(
+        text=f"🇷🇺 Русский", 
+        callback_data=f"lang_ru"
+    )
+
     await message.answer(
         TRANSLATIONS["en"]["welcome"],
         reply_markup=builder.as_markup()
