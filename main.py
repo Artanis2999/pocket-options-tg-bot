@@ -31,7 +31,7 @@ CHANNEL_ID = int(os.getenv("CHANNEL_ID", "-1003005253453"))  # ID канала �
 CHANNEL_LINK = os.getenv("CHANNEL_LINK", "https://t.me/tradingaimoney")  # ссылка на канал для кнопки "Подписаться"
 P_LINK = "https://u3.shortink.io/register?utm_campaign=827062&utm_source=affiliate&utm_medium=sr&a=TkjGqov32uoKgx&ac=ai_trading_bot&sub_id1="
 VIDEO_PATH = Path(__file__).parent / "intro.mp4"
-BOT_DESCRIPTION = "Aviamasters - your aviation helper ✈️"
+BOT_DESCRIPTION = "Pocket Option AI Bot\nmade by maboy team"
 USERS_FILE = Path(__file__).parent / 'users.json'
 IMAGE_PATH = Path(__file__).parent / "assets/main_menu.jpg"
 
