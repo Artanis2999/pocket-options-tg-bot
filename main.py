@@ -252,7 +252,8 @@ def register_user_if_new(user):
             "confirm": False,    # True после отправки внешнего ID
             "external_id": "",   # внешний числовой ID
             "admin": False,      # админов назначаешь вручную
-            "amount": 0
+            "amount": 0,
+            "dep":False
         })
         # сохраняем
         with open(USERS_FILE, "w", encoding="utf-8") as f:
@@ -386,6 +387,60 @@ async def cmd_start(message: types.Message):
         TRANSLATIONS["en"]["welcome"],
         reply_markup=builder.as_markup()
     )
+
+@dp.message(Command("dep"))
+async def cmd_dep(message: types.Message):
+    uid = message.from_user.id
+    if not is_admin(uid):
+        await message.answer("Недостаточно прав.")
+        return
+
+    parts = (message.text or "").strip().split(maxsplit=1)
+    if len(parts) < 2:
+        await message.answer("Укажи ID: /dep 123456  (может быть external_id или tg_id)")
+        return
+
+    arg = parts[1].strip()
+    if not arg.isdigit():
+        await message.answer("ID должен содержать только цифры.")
+        return
+
+    try:
+        with open(USERS_FILE, "r+", encoding="utf-8") as f:
+            data = json.load(f)
+            users = data.get("users", [])
+
+            # сначала ищем по external_id
+            target = next((u for u in users if u.get("external_id") == arg), None)
+
+            # если не нашли — ищем по tg_id
+            if not target:
+                arg_id = int(arg)
+                target = next((u for u in users if u.get("id") == arg_id), None)
+
+            if not target:
+                await message.answer("Пользователь с таким ID не найден.")
+                return
+
+            target["dep"] = True
+
+            f.seek(0)
+            json.dump(data, f, ensure_ascii=False, indent=4)
+            f.truncate()
+
+        uname = f"@{target.get('username')}" if target.get("username") else "(no username)"
+        await message.answer(f"✅ DEP установлен: {target.get('name','')} {uname} (tg_id={target.get('id')}).")
+
+        # уведомляем пользователя
+        try:
+            await bot.send_message(target["id"], "✅ Ваш депозит подтверждён (dep=True).")
+        except Exception:
+            pass
+
+    except Exception:
+        logging.exception("/dep failed")
+        await message.answer("Ошибка при установке dep. Проверь логи сервера.")
+
 
 @dp.message(Command("decline"))
 async def cmd_decline(message: types.Message):
@@ -600,7 +655,7 @@ def has_signal_access(user_id: int) -> bool:
         u = next((u for u in data.get("users", []) if u.get("id") == user_id), None)
         if not u:
             return False
-        return bool(u.get("admin")) or bool(u.get("reg")) or bool(u.get("rec"))
+        return bool(u.get("admin")) or (bool(u.get("reg")) and bool(u.get("dep")))
     except Exception:
         logging.exception("has_signal_access failed")
         return False
@@ -610,7 +665,7 @@ import random
 @dp.message(lambda message: message.text == "🚀 Get a signal")
 async def handle_signal_button(message: types.Message):
     if not has_signal_access(message.from_user.id):
-        await message.answer("❌ Нет доступа к сигналам. Завершите регистрацию или войдите как админ.")
+        await message.answer("❌ Нет доступа к сигналам. Завершите регистрацию и внесите депозит или войдите как админ. Депозит подтверждается в течение 10 минут.")
     else:
 
         action = random.choice(("Купить", "Продать"))
