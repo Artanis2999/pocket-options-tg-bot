@@ -9,6 +9,7 @@ import os
 import asyncio
 from aiogram.types import FSInputFile, WebAppInfo
 import re
+import time
 
 
 # Загрузка конфигурации
@@ -29,11 +30,13 @@ dp = Dispatcher()
 # Конфигурация
 CHANNEL_ID = int(os.getenv("CHANNEL_ID", "-1003005253453"))  # ID канала для проверки подписки
 CHANNEL_LINK = os.getenv("CHANNEL_LINK", "https://t.me/tradingaimoney")  # ссылка на канал для кнопки "Подписаться"
-P_LINK = "https://u3.shortink.io/register?utm_campaign=827062&utm_source=affiliate&utm_medium=sr&a=TkjGqov32uoKgx&ac=ai_trading_bot&sub_id1="
+P_LINK = os.getenv("REG_LINK", "https://u3.shortink.io/register?utm_campaign=827062&utm_source=affiliate&utm_medium=sr&a=TkjGqov32uoKgx&ac=ai_trading_bot&sub_id2=us1&sub_id1=")
 VIDEO_PATH = Path(__file__).parent / "intro.mp4"
 BOT_DESCRIPTION = "Pocket Option AI Bot\nmade by maboy team"
 USERS_FILE = Path(__file__).parent / 'users.json'
 IMAGE_PATH = Path(__file__).parent / "assets/main_menu.jpg"
+
+current_signal = {"trend": None, "time": None, "expires": 0}
 
 # Настройки языков
 LANGUAGES = {
@@ -49,6 +52,12 @@ LANGUAGES = {
 
 # Хранилище данных пользователя
 user_data = {}
+
+def generate_signal():
+    trend = random.choice(["Лонг", "Шорт"])
+    minutes = random.randint(1, 20)
+    expires = time.time() + minutes * 60  # истечёт через N минут
+    return {"trend": trend, "time": minutes, "expires": expires}
 
 async def show_main_menu(chat_id: int, lang: str = "en", message_id: int = None):
     translations = TRANSLATIONS.get(lang, TRANSLATIONS["en"])
@@ -665,15 +674,19 @@ import random
 @dp.message(lambda message: message.text == "🚀 Get a signal")
 async def handle_signal_button(message: types.Message):
     if not has_signal_access(message.from_user.id):
-        await message.answer("❌ Нет доступа к сигналам. Завершите регистрацию и внесите депозит или войдите как админ. Депозит подтверждается в течение 10 минут.")
+        await message.answer("❌ Нет доступа к сигналам. Завершите регистрацию и внесите депозит или войдите как админ. Депозит подтверждается в течение 10 минут. ")
     else:
+        global current_signal
+        # если нет сигнала или он уже истёк — создаём новый
+        if not current_signal["trend"] or time.time() > current_signal["expires"]:
+            current_signal = generate_signal()
 
-        action = random.choice(("Купить", "Продать"))
-        minutes = random.randint(1, 20)
+        trend = current_signal["trend"]
+        minutes = int((current_signal["expires"] - time.time()) // 60)  # сколько осталось
         text = (
-            "📢 Сигнал AUD/CAD\n"
-            f"• Действие: {action}\n"
-            f"• Время: {minutes} мин."
+            "📢 Общий сигнал AUD/CAD\n"
+            f"• Тренд: {trend}\n"
+            f"• Оставшееся время: {minutes} min."
         )
         await message.answer(text)
 

@@ -86,7 +86,7 @@
             "external_id": "111609748",
             "admin": false,
             "amount": 0,
-            "dep": false
+            "dep": true
         },
         {
             "id": 7043864813,
@@ -163,7 +163,7 @@
             "external_id": "111775555",
             "admin": false,
             "amount": 0,
-            "dep": false
+            "dep": true
         },
         {
             "id": 5230668518,
@@ -467,8 +467,8 @@
             "name": "роман",
             "username": "prutick",
             "reg": true,
-            "confirm": false,
-            "external_id": "",
+            "confirm": true,
+            "external_id": "111872848",
             "admin": false,
             "amount": 0,
             "dep": false
@@ -488,6 +488,149 @@
             "id": 2113751652,
             "name": "Колян",
             "username": "puarezz",
+            "reg": false,
+            "confirm": false,
+            "external_id": "",
+            "admin": false,
+            "amount": 0,
+            "dep": false
+        },
+        {
+            "id": 5935779859,
+            "name": "ᅠ",
+            "username": "Dergin_Nn",
+            "reg": true,
+            "confirm": true,
+            "external_id": "111977862",
+            "admin": false,
+            "amount": 0,
+            "dep": false
+        },
+        {
+            "id": 6379716293,
+            "name": "🥷",
+            "username": "komi_kranix",
+            "reg": false,
+            "confirm": false,
+            "external_id": "",
+            "admin": false,
+            "amount": 0,
+            "dep": false
+        },
+        {
+            "id": 5061779491,
+            "name": "хеннест ⛧",
+            "username": "hennest",
+            "reg": false,
+            "confirm": false,
+            "external_id": "",
+            "admin": false,
+            "amount": 0,
+            "dep": false
+        },
+        {
+            "id": 6712954320,
+            "name": "patrikkkkkk",
+            "username": "patrik_eee",
+            "reg": true,
+            "confirm": false,
+            "external_id": "",
+            "admin": false,
+            "amount": 0,
+            "dep": false
+        },
+        {
+            "id": 7788983400,
+            "name": "nanami",
+            "username": "nanamichli",
+            "reg": false,
+            "confirm": false,
+            "external_id": "",
+            "admin": false,
+            "amount": 0,
+            "dep": false
+        },
+        {
+            "id": 5979585302,
+            "name": "Леся",
+            "username": "Lesii88",
+            "reg": false,
+            "confirm": false,
+            "external_id": "",
+            "admin": false,
+            "amount": 0,
+            "dep": false
+        },
+        {
+            "id": 7974283112,
+            "name": "𝐀 | 𝐀",
+            "username": "akopyan_arm301",
+            "reg": true,
+            "confirm": false,
+            "external_id": "",
+            "admin": false,
+            "amount": 0,
+            "dep": false
+        },
+        {
+            "id": 1300431483,
+            "name": "35🖤🤍",
+            "username": "kras35a",
+            "reg": false,
+            "confirm": false,
+            "external_id": "",
+            "admin": false,
+            "amount": 0,
+            "dep": false
+        },
+        {
+            "id": 8109325711,
+            "name": "Ivan Hozainov",
+            "username": "ivankayoo",
+            "reg": false,
+            "confirm": false,
+            "external_id": "",
+            "admin": false,
+            "amount": 0,
+            "dep": false
+        },
+        {
+            "id": 1917268750,
+            "name": "you are weak>>",
+            "username": "useryouareweak",
+            "reg": false,
+            "confirm": false,
+            "external_id": "",
+            "admin": false,
+            "amount": 0,
+            "dep": false
+        },
+        {
+            "id": 1986514845,
+            "name": "Victor BTC 💰",
+            "username": "VictorTradeBTC",
+            "reg": false,
+            "confirm": false,
+            "external_id": "",
+            "admin": false,
+            "amount": 0,
+            "dep": false
+        },
+        {
+            "id": 1568092500,
+            "name": ".",
+            "username": "",
+            "reg": false,
+            "confirm": false,
+            "external_id": "",
+            "admin": false,
+            "amount": 0,
+            "dep": false
+        },
+        {
+            "id": 6228082192,
+            "name": "♡",
+            "username": "hamch1",
             "reg": false,
             "confirm": false,
             "external_id": "",
